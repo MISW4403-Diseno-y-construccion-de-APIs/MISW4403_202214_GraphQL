@@ -18,6 +18,9 @@ import { MovementEntity } from './movement/movement.entity';
 import { MuseumEntity } from './museum/museum.entity';
 import { SponsorEntity } from './sponsor/sponsor.entity';
 import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
+import { ApolloDriver } from '@nestjs/apollo';
 
 @Module({
   imports: [MuseumModule, ExhibitionModule, ArtworkModule, SponsorModule, ImageModule, ArtistModule, MovementModule,
@@ -34,6 +37,11 @@ import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
       keepConnectionAlive: true
     }),
     MuseumArtworkModule,
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      driver: ApolloDriver
+    }),
+
   ],
   controllers: [AppController],
   providers: [AppService],

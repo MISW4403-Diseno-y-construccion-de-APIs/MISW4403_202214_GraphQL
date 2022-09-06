@@ -1,24 +1,31 @@
 /* eslint-disable prettier/prettier */
+import { Field, InputType } from '@nestjs/graphql';
 import {IsNotEmpty, IsString, IsUrl} from 'class-validator';
+
+@InputType()
 export class MuseumDto {
-  readonly id: string;
-  
+ 
+  @Field()
   @IsString()
   @IsNotEmpty()
   readonly name: string;
   
+  @Field()
   @IsString()
   @IsNotEmpty()
   readonly description: string;
   
+  @Field()
   @IsString()
   @IsNotEmpty()
   readonly address: string;
   
+  @Field()
   @IsString()
   @IsNotEmpty()
-  readonly city: string;
+  readonly city: string; 
   
+  @Field()
   @IsUrl()
   @IsNotEmpty()
   readonly image: string;
