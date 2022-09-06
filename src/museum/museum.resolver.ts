@@ -9,29 +9,29 @@ import { MuseumService } from './museum.service';
 export class MuseumResolver {
     constructor(private museumService: MuseumService) {}
 
-    @Query(returns => [MuseumEntity])
+    @Query(() => [MuseumEntity])
     museums(): Promise<MuseumEntity[]> {
         return this.museumService.findAll();
     }
  
-    @Query(returns => MuseumEntity)
+    @Query(() => MuseumEntity)
     museum(@Args('id') id: string): Promise<MuseumEntity> {
         return this.museumService.findOne(id);
     }
 
-    @Mutation(returns => MuseumEntity)
+    @Mutation(() => MuseumEntity)
     createMuseum(@Args('museum') museumDto: MuseumDto): Promise<MuseumEntity> {
         const museum = plainToInstance(MuseumEntity, museumDto);
         return this.museumService.create(museum);
     }
  
-    @Mutation(returns => MuseumEntity)
+    @Mutation(() => MuseumEntity)
     updateMuseum(@Args('id') id: string, @Args('museum') museumDto: MuseumDto): Promise<MuseumEntity> {
         const museum = plainToInstance(MuseumEntity, museumDto);
         return this.museumService.update(id, museum);
     }
  
-    @Mutation(returns => String)
+    @Mutation(() => String)
     deleteMuseum(@Args('id') id: string) {
         this.museumService.delete(id);
         return id;
